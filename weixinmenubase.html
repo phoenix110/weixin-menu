@@ -433,13 +433,13 @@
 
 <script type="text/x-jsrender" id="tpl">
 {{for #data}}
-    <li class="jsMenu pre_menu_item grid_item jslevel1 size1of3 ui-sortable ui-sortable-disabled current selected" id="{{:id}}">
+    <li class="jsMenu pre_menu_item grid_item jslevel1 size1of3 ui-sortable ui-sortable-disabled" id="{{:id}}">
         <a href="javascript:void(0);" class="pre_menu_link" draggable="false"> 
             <i class="icon_menu_dot js_icon_menu_dot dn"></i>
             <i class="icon20_common sort_gray"></i> 
             <span class='js_l1Title'>{{:name}}</span>
         </a>
-        <div class="sub_pre_menu_box js_l2TitleBox" style=''>
+        <div class="sub_pre_menu_box js_l2TitleBox" style='display: none;'>
             <ul class="sub_pre_menu_list">
                 {{for sub}}
                     <li id="{{:id}}" class='jslevel2'>
@@ -565,13 +565,27 @@ var _json =
 	var template = $( "#tpl" ).render( _json );
 	var addL1Btn = $( "#addL1Btn" ).html();
 	console.log(addL1Btn);
-	$( "#menuList" ).html(template);
+	$( "#menuList").html(template);
 
-
-
-
+$("#menuList li").each(
+	function(index, element) {
+		$(this).click(function(){
+			
+			$("#menuList li").removeClass("current selected");
+			
+			$(this).addClass("current selected");
+			
+			$("#sub_pre_menu_box",this).toggle();
+			
+		});
 	});
-</script>
+
+
+
+
+
+
+});</script>
 
 
 </body>
