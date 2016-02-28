@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="./jquery-1.7.2.js" type="text/javascript"></script>
+	<script src="./jsrender.js" type="text/javascript"></script>
+</head>
+<body>
+<a href="../demos.html">JsRender Demos</a><br />
+
+<h3>Render template against local data</h3>
+
+<script id="movieTemplate" type="text/x-jsrender">
+{{for #data}}
+    <li class="jsMenu pre_menu_item grid_item jslevel1 size1of3 ui-sortable ui-sortable-disabled" id="{{:id}}">
+        <a href="javascript:void(0);" class="pre_menu_link" draggable="false"> 
+            <i class="icon_menu_dot js_icon_menu_dot dn"></i>
+            <i class="icon20_common sort_gray"></i> 
+            <span class='js_l1Title'>{{:name}}</span>
+        </a>
+        <div class="sub_pre_menu_box js_l2TitleBox" style='display: none;'>
+            <ul class="sub_pre_menu_list">
+                {{for :sub}}
+                    <li id="{{sub.id of }}" class='jslevel2'>
+                        <a href="javascript:void(0);" class="jsSubView" draggable="false">
+                                <span class="sub_pre_menu_inner js_sub_pre_menu_inner">
+                                   <i class="icon20_common sort_gray"></i>
+                                <span class='js_l2Title'>{{:sub.name}}</span>
+                            </span>
+                        </a>
+                    </li>
+                {{/for}}
+                <li class='js_addMenuBox'>
+                    <a href="javascript:void(0);" class="jsSubView js_addL2Btn" title="最多添加5个子菜单" draggable="false">
+                        <span class="sub_pre_menu_inner js_sub_pre_menu_inner">
+                          <i class="icon14_menu_add"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <i class="arrow arrow_out"></i>
+            <i class="arrow arrow_in"></i>
+        </div>
+    </li>
+{{/for}}
+<li class="js_addMenuBox pre_menu_item grid_item no_extra">
+    <a href="javascript:void(0);" class="pre_menu_link js_addL1Btn" title="最多添加3个一级菜单" draggable="false"> 
+        <i class="icon14_menu_add"></i>
+    </a>
+</li>
+</script>
+
+<div id="movieList"></div>
+
+<script type="text/javascript">
+
+var _json = 
+ [
+    {
+        "id": "Brett", 
+        "name": "McLaughlin", 
+        "sub": [
+            {
+                "id": "Brett", 
+                "name": "McLaughlin"
+            }, 
+            {
+                "id": "Brett", 
+                "name": "McLaughlin"
+            }
+        ]
+    }, 
+    {
+        "id": "Brett", 
+        "name": "McLaughlin", 
+        "sub": [
+            {
+                "id": "Brett", 
+                "name": "McLaughlin"
+            }, 
+            {
+                "id": "Brett", 
+                "name": "McLaughlin"
+            }
+        ]
+    }
+];
+
+	// Render the template with the movies data and insert
+	// the rendered HTML under the "movieList" element
+	$( "#movieList" ).html(
+		$( "#movieTemplate" ).render( _json )
+	);
+
+</script>
+</body>
+</html>
